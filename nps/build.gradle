@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+
+
+configurations {
+    javadocDeps
+}
+
+dependencies {
+    compile files('libs/ksoap2-android-assembly-3.6.2-jar-with-dependencies.jar')
+    compile 'junit:junit:4.12'
+    compile 'org.mockito:mockito-core:2.6.3'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
+
+    defaultConfig {
+      minSdkVersion 11
+      targetSdkVersion 25
+      multiDexEnabled true
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+
+    defaultPublishConfig "sandboxRelease"
+    publishNonDefault true
+
+    productFlavors {
+        production {
+
+        }
+        staging {
+
+        }
+        sandbox {
+
+        }
+        dev {
+
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.4.1'
+}
+
+apply from: 'deploy.gradle'

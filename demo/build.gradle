@@ -1,0 +1,23 @@
+apply plugin: 'com.android.application'
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile project(':nps')
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 25
+        multiDexEnabled true
+    }
+
+
+}

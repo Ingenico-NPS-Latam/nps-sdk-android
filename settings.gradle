@@ -1,0 +1,8 @@
+include ':demo'
+
+include ':nps'
+/* def apiLibDir = file('/home/fernando/AndroidStudioProjects/NpsAndroidDemo/nps')
+def rootProjectDescriptor = settings.rootProject
+settings.createProjectDescriptor(rootProjectDescriptor, 'nps', apiLibDir)
+
+project(':nps').projectDir = new File(rootProject.projectDir, '/home/fernando/AndroidStudioProjects/NpsAndroidDemo/nps)') */
