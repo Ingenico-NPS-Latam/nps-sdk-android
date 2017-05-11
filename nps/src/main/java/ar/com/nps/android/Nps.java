@@ -35,8 +35,8 @@ public class Nps {
 		this.setMerchantId(merchantId);
 	}
 
-	public String getDeviceFingerprint() {
-          return DevicePrint.ioBegin(this.getContext());
+	static public String getDeviceFingerprint(Context context) {
+          return DevicePrint.ioBegin(context);
 	}
 
 	static public String getUrl(Context context) {

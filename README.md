@@ -203,10 +203,16 @@ if you require card installment in the specific case that the customer must view
 
 ##  Device Fingerprint
 
-Generate by Iovation-service a device fingerprint to use as a reference to the device on wich the payment have been requested
+Through this functionality you can collect information about your end-user's devices. The client
+generates a blackbox that contains all available device information. You then return the blackbox (Device Fingerprint) to NPS from
+your back-end servers using the psp_CustomerAdditionalDetails.DeviceFingerPrint API field for Fraud Screening porpouses.
+
+
+###  Nps.getDeviceFingerprint
+
+This method allows you to get de Device Figerprint of the end-user's device.
 
 ```java
 
-Nps nps = new Nps(getApplicationContext(), "__YOUR_CLIENT_SESSION__", "__YOUR_MERCHANT_ID__");
-nps.getDeviceFingerprint();
+Nps.getDeviceFingerprint(getApplicationContext());
 ```
