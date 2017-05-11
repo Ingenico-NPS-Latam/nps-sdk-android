@@ -200,3 +200,13 @@ This validator checks if the security code is a valid integer (size 3-4 characte
 ##  Card Installments
 
 if you require card installment in the specific case that the customer must view the installment payment amount you can follow the next tutorial:
+
+##  Device Fingerprint
+
+Generate by Iovation-service a device fingerprint to use as a reference to the device on wich the payment have been requested
+
+```java
+
+Nps nps = new Nps(getApplicationContext(), "__YOUR_CLIENT_SESSION__", "__YOUR_MERCHANT_ID__");
+nps.getDeviceFingerprint();
+```
