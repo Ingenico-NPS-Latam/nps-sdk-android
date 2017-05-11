@@ -183,4 +183,10 @@ public class NpsTest {
 
     }
 
+    @Test
+    public void getDeviceFingerprint() throws Exception {
+        Nps nps = new Nps(mMockContext, psp_ClientSession, psp_MerchantId);
+        assertTrue(nps.getDeviceFingerprint() != null);
+    }
+
 }

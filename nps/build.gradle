@@ -5,6 +5,12 @@ configurations {
     javadocDeps
 }
 
+repositories {
+    flatDir {
+        dirs project(':nps').file('libs')
+    }
+}
+
 dependencies {
     compile files('libs/ksoap2-android-assembly-3.6.2-jar-with-dependencies.jar')
     compile 'junit:junit:4.12'
@@ -12,6 +18,14 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+}
+
+fileTree(dir: 'libs', include: '**/*.aar')
+        .each { File file ->
+    dependencies.add("compile", [
+            name: file.name.lastIndexOf('.').with { it != -1 ? file.name[0..<it] : file.name },
+            ext: 'aar'
+    ])
 }
 
 android {

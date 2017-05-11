@@ -7,13 +7,27 @@ When a customer submits your payment form, nps-android-sdk sends customer sensit
 With this One-time-use PaymentMethodToken, you can do anything with our API that requires sensitive payment information. Through this mechanism you never handle any sensitive payment information and your PCI scope will be greatly reduced.
 
 
-**To Process payments with nps-android-sdk you should follow the next four steps**
+**Basic Flow:**
 
-1. Securily collecting sensitive payment details with NPS.js
-2. Converting those payment details to a One-time-use PaymentMethodToken
-3. Submitting the PaymentMethodToken to your server.
-4. Use [Sale/Authorization Only](#payments) methods with the psp_VaultReference.PaymentMethodToken to finish the payment.
++ Securily collecting sensitive payment details with NPS.js
++ Converting those payment details to a One-time-use PaymentMethodToken
++ Submitting the PaymentMethodToken to your server.
++ Use [Sale/Authorization Only](#payments) methods with the psp_VaultReference.PaymentMethodToken to finish the payment.
 
+
+**To Process payments with nps-android-sdk you should follow the following steps**
+
+<%= tag :img, :src => "/images/diagrams/SDK-clientes.png" %>
+
+1. Customer device ask to Merchant Backend for a clientSession ID
+2. Merchant Backend does CreateClientSession() on Ingenico NPS Latam
+3. Ingenico NPS Latam responses the CreateClientSession() with a clientsession ID
+4. The clientsession ID is sended to customer device
+5. Customer device uses clientsession ID to request CreatePaymentMethodToken() on Ingenico NPS Latam sending all sensitive payment details
+6. Ingenico NPS Latam responses with a Token (This token can be used just one time)
+7. Customer device sends the Token to Merchant Backend
+8. Merchant Backend requests any type of payment using the token received
+9. Ingenico NPS Latam responses the payment made.
 
 ##  Installation
     
@@ -23,7 +37,7 @@ To get started install on your Android API following the next steps:
 
 1. Clone this project
 2. On your Android Studio go to: File -> New -> Import Module and find conektasdk folder on your file system.
-3. Go to File -> Project Structure..., this will open a window, then choose on Modules section your app, then click on Dependencies tab, then click on + button, and on Module dependency dialog, choose nps-sdk.
+3. Go to File -> Project Structure..., this will open a window, then choose on Modules section your app, click on Dependencies tab,  click on "+" button, and finally on Module dependency dialog choose nps-sdk.
 
 Add the nps-android-sdk dependency to the build.gradle file.
 
@@ -165,7 +179,7 @@ The **Nps.ResponseHandler.onError** should be used for error handling. The commo
 
 ##  Client-side Card Validation
 
-Form validation is mandatory. On form submition nps.validateCardNumber above secuence of validation must be executed:
+Form validation is mandatory. On form submition nps.validateCardNumber must be executed below sequence of validation :
 
 ###  card.validateCardHolderName
 
@@ -177,7 +191,7 @@ Checks that the number of credit card is formatted correctly and pass the Luhn t
 
 ###  card.validateCardExpDate
 
-This validator checks if the expiration date is a valid month in the future.
+This validator checks if the expiration date is a valid month and not expired.
 
 ###  card.validateCardSecurityCode
 

@@ -4,6 +4,8 @@ package ar.com.nps.android;
 import android.content.Context;
 import android.util.Log;
 
+import com.iovation.mobile.android.DevicePrint;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
@@ -31,6 +33,10 @@ public class Nps {
 		this.setContext(context);
 		this.setClientSession(clientSession);
 		this.setMerchantId(merchantId);
+	}
+
+	public String getDeviceFingerprint() {
+          return DevicePrint.ioBegin(this.getContext());
 	}
 
 	static public String getUrl(Context context) {
@@ -203,7 +209,7 @@ public class Nps {
 			// Log.d("createPaymentMethodToken","creé el objeto PaymentMethodToken");
 
 
-			if(Integer.parseInt(paymentMethod.getCardNumPayments()) >= 1) {
+			if(this.getCountry() == "CHL") {
 				ArrayList<InstallmentOption> installmentOptionsList = this.getInstallmentsOptions(psp_PaymentMethodToken, paymentMethod.getProduct(), paymentMethod.getCardNumPayments());
 				paymentMethodToken.setInstallmentOptions(installmentOptionsList);
 			}
