@@ -6,19 +6,12 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import ar.com.nps.android.Card;
-import ar.com.nps.android.InstallmentOption;
 import ar.com.nps.android.Nps;
-import ar.com.nps.android.PaymentMethod;
 import ar.com.nps.android.PaymentMethodToken;
 
 
@@ -58,58 +51,14 @@ public class MainActivity extends Activity {
         final EditText inputCardExpirationDate = (EditText)findViewById(R.id.card_expiration_date);
         final EditText inputCardSecurityCode = (EditText)findViewById(R.id.card_security_code);
         Button btn = (Button)findViewById(R.id.send);
-        final TextView cardInstallmentsAnswer = (TextView)findViewById(R.id.card_installments_answer);
+        final TextView cardAnswer = (TextView)findViewById(R.id.card_answer);
 
-        final Spinner inputCardInstallments = (Spinner)findViewById(R.id.card_installments);
-        String[] inputCardInstallmentsItems = new String[]{"1", "2", "3", "4" ,"5" ,"6", "99"};
-        ArrayAdapter<String> inputCardInstallmentsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, inputCardInstallmentsItems);
-        inputCardInstallments.setAdapter(inputCardInstallmentsAdapter);
-
-
-        final ArrayList<String> arrayPaymentMethods = new ArrayList<String>();
-        ArrayList<PaymentMethod> paymentMethods = new ArrayList<PaymentMethod>();
-        final Spinner inputPaymentMethods = (Spinner)findViewById(R.id.payment_methods);
-        String[] inputPaymentMethodsItems = new String[paymentMethods.size()+1];
-        inputPaymentMethodsItems[0] = "New Card";
-        for (int i = 1; i < inputPaymentMethodsItems.length; i++) {
-            arrayPaymentMethods.add(paymentMethods.get(i-1).getId());
-            inputPaymentMethodsItems[i] = paymentMethods.get(i-1).getMaskedNumberAlt();
-        }
-        ArrayAdapter<String> inputPaymentMethodsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, inputPaymentMethodsItems);
-        inputPaymentMethods.setAdapter(inputPaymentMethodsAdapter);
-
-
-
-
-        inputPaymentMethods.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(inputPaymentMethods.getSelectedItemPosition() > 0) {
-                    inputCardHolderName.setVisibility(View.GONE);
-                    inputCardNumber.setVisibility(View.GONE);
-                    inputCardExpirationDate.setVisibility(View.GONE);
-                }else {
-                    inputCardHolderName.setVisibility(View.VISIBLE);
-                    inputCardNumber.setVisibility(View.VISIBLE);
-                    inputCardExpirationDate.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 Nps nps = new Nps(getApplicationContext(), psp_ClientSession, psp_MerchantId);
-                nps.setAmount("100000");
-                nps.setCountry("CHL");
-                nps.setCurrency("152");
 
 
                 Log.d("validateNumber",String.valueOf(nps.validateCardNumber(inputCardNumber.getText().toString())));
@@ -127,40 +76,26 @@ public class MainActivity extends Activity {
 
                         String demoResponse = "Exito! token=" + paymentMethodToken.getId();
 
-                        if (paymentMethodToken.getInstallmentOptions().size() >= 1) {
-                            InstallmentOption installmentOption = (InstallmentOption) paymentMethodToken.getInstallmentOptions().get(0);
-                            demoResponse = demoResponse + "make " + installmentOption.getNumPayments() + " monthly payments of " + installmentOption.getInstallmentAmount();
-                        }
-
-                        cardInstallmentsAnswer.setText(demoResponse);
+                        cardAnswer.setText(demoResponse);
                     }
 
                     @Override
                     public void onError(Exception error) {
                         Log.d("Nps", "dentro del onError");
-                        cardInstallmentsAnswer.setText(error.getMessage());
+                        cardAnswer.setText(error.getMessage());
                     }
                 };
 
 
 
-                if(inputPaymentMethods.getSelectedItemPosition() > 0) {
-                    PaymentMethod paymentMethod = new PaymentMethod()
-                            .setCardSecurityCode(inputCardSecurityCode.getText().toString())
-                            .setCardNumPayments(inputCardInstallments.getSelectedItem().toString())
-                            .setId(arrayPaymentMethods.get(inputPaymentMethods.getSelectedItemPosition()-1))
-                            ;
-                    nps.recachePaymentMethodToken(paymentMethod, null, responseHandler);
-                }else {
                     Card card = new Card()
                             .setHolderName(inputCardHolderName.getText().toString())
                             .setNumber(inputCardNumber.getText().toString())
                             .setExpirationDate(inputCardExpirationDate.getText().toString())
                             .setSecurityCode(inputCardSecurityCode.getText().toString())
-                            .setNumPayments(inputCardInstallments.getSelectedItem().toString())
                             ;
                     nps.createPaymentMethodToken(card, null, responseHandler);
-                }
+
 
             }
         });

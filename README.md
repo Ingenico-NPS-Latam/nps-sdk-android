@@ -76,7 +76,7 @@ Follow the next sections to get the parameters.
 Nps nps = new Nps(getApplicationContext(), "__YOUR_CLIENT_SESSION__", "__YOUR_MERCHANT_ID__");
 ```
 
-##  Configure Your Client Session
+###  Configure Your Client Session
 
 You should configure your client session to be able to start to use nps-android-sdk to identify your site while communicating with NPS. 
 To do this, set value as parameter on the constructor of the Nps class. Remember to replace the client session call on sandbox with the production domain when you are ready to create real charges.
@@ -86,35 +86,12 @@ You can obtain your client session by calling the webservice method "CreateClien
 [CreateClientSession (Response)](#panel-parameters-reference)
 
 
-##  Configure Your Merchant ID
+###  Configure Your Merchant ID
 
 You should configure your merchant ID to be able to start to use nps-android-sdk to identify your site while communicating with NPS. 
 To do this, use the merchant ID provided by NPS. Remember to replace the merchant ID on sandbox with the production merchant ID when you are ready to create real charges.
 
 
-###  Configure Amount
-
-You should configure the FULL payment amount as cents, to be able to accept installment to calculate the installment amount. To do this, use the call setAmount.
-
-```java
-nps.setAmount('120050');
-```
-
-###  Configure Country
-
-You should configure the country where the payment is recieved, to be able to accept installment to calculate the installment amount. To do this, use the call setCountry.
-
-```java
-NPS.setCountry('CHL');
-```
-
-###  Configure Currency
-
-You should configure the currency wich the payment is processed in, to be able to accept installment to calculate the installment amount. To do this, use the call setCurrency.
-
-```java
-NPS.setCurrency('152');
-```
 
 ##  Tokenizing Cards
 
@@ -177,7 +154,7 @@ The **Nps.ResponseHandler.onError** should be used for error handling. The commo
 
 
 
-##  Client-side Card Validation
+##  Card Validators
 
 Form validation is mandatory. On form submition nps.validateCardNumber must be executed below sequence of validation :
 
@@ -200,6 +177,30 @@ This validator checks if the security code is a valid integer (size 3-4 characte
 ##  Card Installments
 
 if you require card installment in the specific case that the customer must view the installment payment amount you can follow the next tutorial:
+
+###  Configure Amount
+
+You should configure the FULL payment amount as cents, to be able to accept installment to calculate the installment amount. To do this, use the call setAmount.
+
+```java
+nps.setAmount('120050');
+```
+
+###  Configure Country
+
+You should configure the country where the payment is recieved, to be able to accept installment to calculate the installment amount. To do this, use the call setCountry.
+
+```java
+NPS.setCountry('CHL');
+```
+
+###  Configure Currency
+
+You should configure the currency wich the payment is processed in, to be able to accept installment to calculate the installment amount. To do this, use the call setCurrency.
+
+```java
+NPS.setCurrency('152');
+```
 
 ##  Device Fingerprint
 
