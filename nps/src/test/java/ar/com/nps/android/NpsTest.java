@@ -188,4 +188,11 @@ public class NpsTest {
         assertTrue(Nps.getDeviceFingerprint(mMockContext) != null);
     }
 
+    @Test
+    public void getIINDetails() throws Exception {
+        Nps nps = new Nps(mMockContext, psp_ClientSession, psp_MerchantId);
+        Card card = nps.getIINDetails("450799");
+        assertTrue(card.getProduct() != null);
+    }
+
 }

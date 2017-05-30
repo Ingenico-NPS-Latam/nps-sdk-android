@@ -100,6 +100,28 @@ public class Nps {
 	public void setCountry(String country) {
 		this.country = country;
 	}	
+
+	public Card getIINDetails(String number) {
+		SoapObject Requerimiento = new SoapObject(Nps.getNamespace(this.getContext()), "GetIINDetails");
+		Requerimiento.addProperty("psp_Version",PSP_VERSION);
+		Requerimiento.addProperty("psp_MerchantId",this.getMerchantId());
+		Requerimiento.addProperty("psp_IIN",number);
+		Requerimiento.addProperty("psp_PosDateTime",Nps.getPosDateTime());
+		Requerimiento.addProperty("psp_ClientSession",this.getClientSession());
+
+
+		SoapObject request = new SoapObject(Nps.getNamespace(this.getContext()), "GetIINDetails");
+		request.addProperty("Requerimiento",Requerimiento);
+
+		SoapObject response = send(this.getContext(), "GetIINDetails", request);
+		String psp_ResponseCod = response.getPropertyAsString("psp_ResponseCod");
+
+		Card card = new Card();
+		if(Integer.parseInt(psp_ResponseCod) == 2) {
+			card.setProduct(response.getPropertyAsString("psp_Product"));
+		}
+		return card;
+	}
 	
 	public String getProduct(String number) {
 		SoapObject Requerimiento = new SoapObject(Nps.getNamespace(this.getContext()), "GetIINDetails");
@@ -377,8 +399,8 @@ public class Nps {
         luhn_valid = Nps.isValidLuhn(number);
         length_valid = Nps.isValidLength(number);
         if(luhn_valid && length_valid) {
-            /* String psp_Product = this.getProduct(number);
-            iin_valid = psp_Product != null && psp_Product != ""; */
+            String psp_Product = this.getProduct(number);
+            iin_valid = psp_Product != null && psp_Product != "";
             iin_valid = true;
         }
         return luhn_valid && length_valid && iin_valid;
