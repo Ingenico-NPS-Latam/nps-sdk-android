@@ -17,15 +17,21 @@ With this One-time-use PaymentMethodToken, you can do anything with our API that
 
 **To Process payments with nps-android-sdk you should follow the following steps**
 
+ 
+
 1. Customer device ask to Merchant Backend for a clientSession ID
 2. Merchant Backend does CreateClientSession() on Ingenico NPS Latam
 3. Ingenico NPS Latam responses the CreateClientSession() with a clientsession ID
 4. The clientsession ID is sended to customer device
-5. Customer device uses clientsession ID to request CreatePaymentMethodToken() on Ingenico NPS Latam sending all sensitive payment details
-6. Ingenico NPS Latam responses with a Token (This token can be used just one time)
-7. Customer device sends the Token to Merchant Backend
-8. Merchant Backend requests any type of payment using the token received
-9. Ingenico NPS Latam responses the payment made.
+5. Client Device shows credit card input data form
+6. Customer completes the form with credit card data
+7. Customer device uses clientsession ID to request CreatePaymentMethodToken() on Ingenico NPS Latam sending all sensitive payment details. This token is a one time used token.
+8. Ingenico NPS Latam responses with a PaymentMethodToken (This token can be used just one time)
+9. Customer device sends PaymentMethodToken to Merchant Backend
+10. Merchant Backend requests any type of payment using the token received 
+11. Ingenico NPS Latam responses the payment made.
+12. Merchant Backend sends payment response to customer device.
+13. And finally customer device shows payment response to the customer 
 
 ##  Installation
     
@@ -39,10 +45,8 @@ To get started install on your Android API following the next steps:
 
 Add the nps-android-sdk dependency to the build.gradle file.
 
-```java
-dependencies {
-    compile project(':nps')
-}
+```bash
+compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.0'
 ```
 
 ##  Integrate
@@ -152,6 +156,60 @@ The **Nps.ResponseHandler.onError** should be used for error handling. The commo
 
 
 
+###  Tokenizing Cards From PaymentMethodId
+
+You are able to create a PaymentMethodToken with only your stored PaymentMethodId and the card security code; Card security code is only required in some countries.
+PaymentMethodId is a persistant PaymentMethodToken wich is created by calling the server-side method [CreatePaymentMethod (Request)](#panel-parameters-reference) and [CreateCustomer (Request)](#panel-parameters-reference), 
+Behaviour and capabilities of recache has been cloned from original createPaymentMethodToken method.
+
+> Recache a PaymentMethodToken by passing a PaymentMethod Object with the PaymentMethod data
+
+```html
+<script>
+Nps nps = new Nps(getApplicationContext(), "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
+
+PaymentMethod paymentMethod = new PaymentMethod();
+paymentMethod.setId('51e0kuKSwkG3GlaGq2fQaNdBsfOY0EHY');
+paymentMethod.setCardSecurityCode("123");
+
+Billing billing = new Billing();
+
+billing.getPerson()
+          .setFirstName("John")
+          .setLastName("Smith")
+          .setDateOfBirth("1987-01-01")
+          .setGender("M")
+          .setNationality("ARG")
+          .setIdType(Billing.IDTYPE_AR_DNI)
+          .setIdNumber("32123123")
+          .setPhoneNumber1("4123-1234")
+          .setPhoneNumber2("4123-5678");
+
+billing.getAddress()
+          .setAdditionalInfo("adding additional info")
+          .setCity("Capital Federal")
+          .setStateProvince("Capital Federal")
+          .setCountry("ARG")
+          .setZipCode("1414")
+          .setStreet("Calle Falsa")
+          .setHouseNumber("123");
+
+nps.recachePaymentMethodToken(paymentMethod, billing, new Nps.ResponseHandler() {
+        @Override
+        public void onSuccess(PaymentMethodToken paymentMethodToken) {
+            Log.d("Nps", "token success = " + paymentMethodToken.getId());
+        }
+
+        @Override
+        public void onError(Exception error) {
+            Log.d("Nps", "token error");
+        }
+    });
+</script>
+```
+
+
+
 ##  Card Validators
 
 Form validation is mandatory. On form submition nps.validateCardNumber must be executed below sequence of validation :
@@ -164,6 +222,19 @@ This validator checks if the name on card is a valid name with min-length of 2 a
 
 Checks that the number of credit card is formatted correctly and pass the Luhn test.
 
+### # IIN Lookup
+
+By retrieving the product ID with the IIN you are able to validate the card number.
+This method will also call the webservice method "GetIINDetails":
+[GetIINDetails (Request)](#panel-parameters-reference)
+[GetIINDetails (Response)](#panel-parameters-reference)
+
+```java
+Nps nps = new Nps(getApplicationContext(), "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
+
+nps.getIINDetails('450799');
+```
+
 ###  card.validateCardExpDate
 
 This validator checks if the expiration date is a valid month and not expired.
@@ -174,13 +245,23 @@ This validator checks if the security code is a valid integer (size 3-4 characte
 
 ##  Card Installments
 
-if you require card installment in the specific case that the customer must view the installment payment amount you can follow the next tutorial:
+if you require card installment in the specific case that the customer must view the installment payment amount you can follow the next example:
+
+```java
+Nps nps = new Nps(getApplicationContext(), "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
+nps.setAmount('120050');
+nps.setCountry('CHL');
+nps.setCurrency('152');
+
+nps.getInstallmentsOptions('8T3BOsXaLMxVsvtHiSuWKL1DEOUUDq3N', '14', '3');
+```
 
 ###  Configure Amount
 
 You should configure the FULL payment amount as cents, to be able to accept installment to calculate the installment amount. To do this, use the call setAmount.
 
 ```java
+Nps nps = new Nps(getApplicationContext(), "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
 nps.setAmount('120050');
 ```
 
@@ -189,7 +270,8 @@ nps.setAmount('120050');
 You should configure the country where the payment is recieved, to be able to accept installment to calculate the installment amount. To do this, use the call setCountry.
 
 ```java
-NPS.setCountry('CHL');
+Nps nps = new Nps(getApplicationContext(), "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
+nps.setCountry('CHL');
 ```
 
 ###  Configure Currency
@@ -197,7 +279,8 @@ NPS.setCountry('CHL');
 You should configure the currency wich the payment is processed in, to be able to accept installment to calculate the installment amount. To do this, use the call setCurrency.
 
 ```java
-NPS.setCurrency('152');
+Nps nps = new Nps(getApplicationContext(), "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
+nps.setCurrency('152');
 ```
 
 ##  Device Fingerprint
