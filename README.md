@@ -222,7 +222,7 @@ This validator checks if the name on card is a valid name with min-length of 2 a
 
 Checks that the number of credit card is formatted correctly and pass the Luhn test.
 
-### # IIN Lookup
+### IIN Lookup
 
 By retrieving the product ID with the IIN you are able to validate the card number.
 This method will also call the webservice method "GetIINDetails":
