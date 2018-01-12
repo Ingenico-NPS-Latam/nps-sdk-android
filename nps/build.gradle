@@ -41,8 +41,12 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 
-
+    /*
     defaultPublishConfig "sandboxRelease"
     publishNonDefault true
 
@@ -59,11 +63,11 @@ android {
         dev {
 
         }
-    }
+    }*/
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.4.1'
 }
 
-apply from: 'deploy.gradle'
+/* apply from: 'deploy.gradle' */
