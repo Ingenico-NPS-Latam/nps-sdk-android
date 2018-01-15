@@ -27,11 +27,11 @@ def getSnapshotRepositoryUrl() {
 }
 
 def getRepositoryUsername() {
-    return hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : "F9GpUetl"
+    return hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : mavenUser
 }
 
 def getRepositoryPassword() {
-    return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : "+7OxfJFFjjwAp7VrHvuvk0REtS15M9J8/zHIVWXc+k2c"
+    return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : mavenPassword
 }
 
 afterEvaluate { project ->
@@ -42,7 +42,7 @@ afterEvaluate { project ->
 
                 pom.groupId = "com.github.ingenico-nps-latam"
                 pom.artifactId = "nps-sdk-android"
-                pom.version = "1.0.0"
+                pom.version = "1.0.3"
 
                 repository(url: getReleaseRepositoryUrl()) {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
