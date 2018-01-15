@@ -46,7 +46,7 @@ To get started install on your Android API following the next steps:
 Add the nps-android-sdk dependency to the build.gradle file.
 
 ```bash
-compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.0'
+compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.2'
 ```
 
 ##  Integrate
