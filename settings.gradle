@@ -1,4 +1,4 @@
-include ':demo'
+//include ':demo'
 
 include ':nps'
 /* def apiLibDir = file('/home/fernando/AndroidStudioProjects/NpsAndroidDemo/nps')
