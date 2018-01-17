@@ -5,8 +5,8 @@
     <artifactId>nps-sdk-android</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
-    <name>NPS SDK Java</name>
-    <description>NPS SDK Java</description>
+    <name>NPS SDK Android</name>
+    <description>NPS SDK Android</description>
     <url>https://github.com/Ingenico-NPS-Latam/nps-sdk-android</url>
     <licenses>
         <license>

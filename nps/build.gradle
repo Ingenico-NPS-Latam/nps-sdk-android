@@ -46,15 +46,16 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
-    /*
-    defaultPublishConfig "sandboxRelease"
-    publishNonDefault true
 
+    defaultPublishConfig "productionRelease"
+    //publishNonDefault true
+
+    /*
     productFlavors {
         production {
 
         }
-        staging {
+        /*staging {
 
         }
         sandbox {
@@ -70,4 +71,4 @@ task wrapper(type: Wrapper) {
     gradleVersion = '3.4.1'
 }
 
-/* apply from: 'deploy.gradle' */
+apply from: 'deploy.gradle'

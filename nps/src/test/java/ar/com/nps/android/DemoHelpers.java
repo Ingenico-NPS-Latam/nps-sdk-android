@@ -71,7 +71,7 @@ public class DemoHelpers {
         }
     }
 
-    public static PaymentMethod CreatePaymentMethod(Context context, String psp_MerchantId, String secretCode) {
+    public static PaymentMethod CreatePaymentMethod(String environment, String psp_MerchantId, String secretCode) {
         try {
             SoapObject CardInputDetails = new SoapObject();
             CardInputDetails.addProperty("Number","4507990000000010");
@@ -84,7 +84,7 @@ public class DemoHelpers {
             psp_PaymentMethod.addProperty("CardInputDetails",CardInputDetails);
 
 
-            SoapObject Requerimiento = new SoapObject(Nps.getNamespace(context), "CreatePaymentMethod");
+            SoapObject Requerimiento = new SoapObject(environment, "CreatePaymentMethod");
             Requerimiento.addProperty("psp_Version",Nps.PSP_VERSION);
             Requerimiento.addProperty("psp_MerchantId",psp_MerchantId);
             Requerimiento.addProperty("psp_PaymentMethod",psp_PaymentMethod);
@@ -93,10 +93,10 @@ public class DemoHelpers {
             String psp_SecureHash = DemoHelpers.calculateMD5(Requerimiento.getProperty("psp_MerchantId") + "" + Requerimiento.getProperty("psp_PosDateTime") + "" + Requerimiento.getProperty("psp_Version") + "" + secretCode);
             Requerimiento.addProperty("psp_SecureHash",psp_SecureHash);
 
-            SoapObject request = new SoapObject(Nps.getNamespace(context), "CreatePaymentMethod");
+            SoapObject request = new SoapObject(environment, "CreatePaymentMethod");
             request.addProperty("Requerimiento",Requerimiento);
 
-            SoapObject response = Nps.send(context, "CreatePaymentMethod",request);
+            SoapObject response = Nps.send(environment, "CreatePaymentMethod",request);
             String psp_ResponseCod = response.getPropertyAsString("psp_ResponseCod");
             SoapObject responsePspPaymentMethod = (SoapObject) response.getProperty("psp_PaymentMethod");
             if(Integer.parseInt(psp_ResponseCod) == 2) {
@@ -113,7 +113,7 @@ public class DemoHelpers {
         return new PaymentMethod();
     }
 
-    public static String CreateCustomer(Context context, String psp_MerchantId, String secretCode) {
+    public static String CreateCustomer(String environment, String psp_MerchantId, String secretCode) {
         try {
             SoapObject CardInputDetails = new SoapObject();
             CardInputDetails.addProperty("Number","4507990000000010");
@@ -126,7 +126,7 @@ public class DemoHelpers {
             psp_PaymentMethod.addProperty("CardInputDetails",CardInputDetails);
 
 
-            SoapObject Requerimiento = new SoapObject(Nps.getNamespace(context), "CreateCustomer");
+            SoapObject Requerimiento = new SoapObject(environment, "CreateCustomer");
             Requerimiento.addProperty("psp_Version",Nps.PSP_VERSION);
             Requerimiento.addProperty("psp_MerchantId",psp_MerchantId);
             Requerimiento.addProperty("psp_EmailAddress","mi@email.com");
@@ -136,10 +136,10 @@ public class DemoHelpers {
             String psp_SecureHash = DemoHelpers.calculateMD5(Requerimiento.getProperty("psp_EmailAddress") + "" + Requerimiento.getProperty("psp_MerchantId") + "" + Requerimiento.getProperty("psp_PosDateTime") + "" + Requerimiento.getProperty("psp_Version") + "" + secretCode);
             Requerimiento.addProperty("psp_SecureHash",psp_SecureHash);
 
-            SoapObject request = new SoapObject(Nps.getNamespace(context), "CreateCustomer");
+            SoapObject request = new SoapObject(environment, "CreateCustomer");
             request.addProperty("Requerimiento",Requerimiento);
 
-            SoapObject response = Nps.send(context, "CreateCustomer",request);
+            SoapObject response = Nps.send(environment, "CreateCustomer",request);
             String psp_ResponseCod = response.getPropertyAsString("psp_ResponseCod");
             if(Integer.parseInt(psp_ResponseCod) == 2) {
                 return response.getPropertyAsString("psp_CustomerId");
@@ -150,9 +150,9 @@ public class DemoHelpers {
         }
     }
 
-    public static String CreateClientSession(Context context, String psp_MerchantId, String secretCode) {
+    public static String CreateClientSession(String environment, String psp_MerchantId, String secretCode) {
         try {
-            SoapObject Requerimiento = new SoapObject(Nps.getNamespace(context), "CreateClientSession");
+            SoapObject Requerimiento = new SoapObject(environment, "CreateClientSession");
             Requerimiento.addProperty("psp_Version",Nps.PSP_VERSION);
             Requerimiento.addProperty("psp_MerchantId",psp_MerchantId);
             Requerimiento.addProperty("psp_PosDateTime",Nps.getPosDateTime());
@@ -160,10 +160,10 @@ public class DemoHelpers {
             String psp_SecureHash = DemoHelpers.calculateMD5(Requerimiento.getProperty("psp_MerchantId") + "" + Requerimiento.getProperty("psp_PosDateTime") + "" + Requerimiento.getProperty("psp_Version") + "" + secretCode);
             Requerimiento.addProperty("psp_SecureHash",psp_SecureHash);
 
-            SoapObject request = new SoapObject(Nps.getNamespace(context), "CreateClientSession");
+            SoapObject request = new SoapObject(environment, "CreateClientSession");
             request.addProperty("Requerimiento",Requerimiento);
 
-            SoapObject response = Nps.send(context, "CreateClientSession",request);
+            SoapObject response = Nps.send(environment, "CreateClientSession",request);
             String psp_ResponseCod = response.getPropertyAsString("psp_ResponseCod");
             if(Integer.parseInt(psp_ResponseCod) == 2) {
                 return response.getPropertyAsString("psp_ClientSession");
@@ -174,9 +174,9 @@ public class DemoHelpers {
         }
     }
 
-     public static ArrayList<PaymentMethod> RetrievePaymentMethods(Context context, String psp_MerchantId, String psp_CustomerId, String secretCode) {
+     public static ArrayList<PaymentMethod> RetrievePaymentMethods(String environment, String psp_MerchantId, String psp_CustomerId, String secretCode) {
         try {
-            SoapObject Requerimiento = new SoapObject(Nps.getNamespace(context), "RetrieveCustomer");
+            SoapObject Requerimiento = new SoapObject(environment, "RetrieveCustomer");
             Requerimiento.addProperty("psp_Version",Nps.PSP_VERSION);
             Requerimiento.addProperty("psp_MerchantId",psp_MerchantId);
             Requerimiento.addProperty("psp_CustomerId",psp_CustomerId);
@@ -185,10 +185,10 @@ public class DemoHelpers {
             String psp_SecureHash = DemoHelpers.calculateMD5(Requerimiento.getProperty("psp_Version") + "" + Requerimiento.getProperty("psp_MerchantId") + "" + Requerimiento.getProperty("psp_CustomerId") + "" + Requerimiento.getProperty("psp_PosDateTime") + "" + secretCode);
             Requerimiento.addProperty("psp_SecureHash",psp_SecureHash);
 
-            SoapObject request = new SoapObject(Nps.getNamespace(context), "RetrieveCustomer");
+            SoapObject request = new SoapObject(environment, "RetrieveCustomer");
             request.addProperty("Requerimiento",Requerimiento);
 
-            SoapObject response = Nps.send(context, "RetrieveCustomer",request);
+            SoapObject response = Nps.send(environment, "RetrieveCustomer",request);
             String psp_ResponseCod = response.getPropertyAsString("psp_ResponseCod");
             if(Integer.parseInt(psp_ResponseCod) == 2) {
 

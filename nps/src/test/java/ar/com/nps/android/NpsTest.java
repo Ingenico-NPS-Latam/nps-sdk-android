@@ -36,8 +36,8 @@ public class NpsTest {
 
 
 
-        psp_ClientSession = DemoHelpers.CreateClientSession(mMockContext, psp_MerchantId, secretCode);
-        psp_CustomerId = DemoHelpers.CreateCustomer(mMockContext, psp_MerchantId, secretCode);
+        psp_ClientSession = DemoHelpers.CreateClientSession(Nps.SANDBOX, psp_MerchantId, secretCode);
+        psp_CustomerId = DemoHelpers.CreateCustomer(Nps.SANDBOX, psp_MerchantId, secretCode);
     }
 
     @Before
@@ -54,7 +54,7 @@ public class NpsTest {
 
     @Test
     public void getProduct() throws Exception {
-      Nps nps = new Nps(mMockContext, psp_ClientSession, psp_MerchantId);
+      Nps nps = new Nps(Nps.SANDBOX, psp_ClientSession, psp_MerchantId);
 
       String product = nps.getProduct("4507990000000010");
 
@@ -68,7 +68,7 @@ public class NpsTest {
 
     @Test
     public void recachePaymentMethodToken() throws Exception {
-      Nps nps = new Nps(mMockContext, psp_ClientSession, psp_MerchantId);
+      Nps nps = new Nps(Nps.SANDBOX, psp_ClientSession, psp_MerchantId);
 
       Billing billing = new Billing();
 
@@ -115,7 +115,7 @@ public class NpsTest {
 
         ;
 
-      PaymentMethod paymentMethod = DemoHelpers.CreatePaymentMethod(mMockContext, psp_MerchantId, secretCode);
+      PaymentMethod paymentMethod = DemoHelpers.CreatePaymentMethod(Nps.SANDBOX, psp_MerchantId, secretCode);
       paymentMethod.setCardSecurityCode("123");
       paymentMethod.setCardNumPayments("1");
 
@@ -123,8 +123,14 @@ public class NpsTest {
     }
 
     @Test
+    public void createClientSession() throws Exception {
+        psp_ClientSession = DemoHelpers.CreateClientSession(Nps.SANDBOX, psp_MerchantId, secretCode);
+        assertTrue(psp_ClientSession != "");        
+    }
+    
+    @Test
     public void createPaymentMethodToken() throws Exception {
-        Nps nps = new Nps(mMockContext, psp_ClientSession, psp_MerchantId);
+        Nps nps = new Nps(Nps.SANDBOX, psp_ClientSession, psp_MerchantId);
         /* nps.setAmount("100000");
         nps.setCountry("CHL");
         nps.setCurrency("152"); */
@@ -190,7 +196,7 @@ public class NpsTest {
 
     @Test
     public void getIINDetails() throws Exception {
-        Nps nps = new Nps(mMockContext, psp_ClientSession, psp_MerchantId);
+        Nps nps = new Nps(Nps.SANDBOX, psp_ClientSession, psp_MerchantId);
         Card card = nps.getIINDetails("450799");
         assertTrue(card.getProduct() != null);
     }
