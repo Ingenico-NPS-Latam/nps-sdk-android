@@ -68,9 +68,9 @@ android {
             }
     }*/
 }
-
+/*
 task wrapper(type: Wrapper) {
     gradleVersion = '3.4.1'
 }
-
+*/
 //apply from: 'deploy.gradle'
