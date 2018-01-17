@@ -48,23 +48,23 @@ android {
     }
 
 
-    defaultPublishConfig "productionRelease"
+    //defaultPublishConfig "productionRelease"
     //publishNonDefault true
 
 
     productFlavors {
-        production {
+        /*    production {
 
-        }
-        /*staging {
+            }
+            /*staging {
 
-        }
-        sandbox {
+            }
+            sandbox {
 
-        }
-        dev {
+            }
+            dev {
 
-        }*/
+            }*/
     }
 }
 

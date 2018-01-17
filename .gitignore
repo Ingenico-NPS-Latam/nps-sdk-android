@@ -12,3 +12,7 @@ demo/src/main/java/ar/com/nps/demo/DevActivity.java
 demo/src/main/java/ar/com/nps/demo/DemoHelpers.java
 demo/src/main/java/ar/com/nps/demo/WithInstallmentsDevActivity.java
 .idea
+/nps/deploy.gradle
+nps/*.gradle
+gradle.bintray.properties
+deploy.settings

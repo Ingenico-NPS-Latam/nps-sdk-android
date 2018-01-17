@@ -75,7 +75,7 @@ To be able to use nps-android-sdk methods you need to get a new instance of the 
 Follow the next sections to get the parameters.
 
 ```html
-Nps nps = new Nps(getApplicationContext(), "__YOUR_CLIENT_SESSION__", "__YOUR_MERCHANT_ID__");
+Nps nps = new Nps(Nps.SANDBOX, "__YOUR_CLIENT_SESSION__", "__YOUR_MERCHANT_ID__");
 ```
 
 ###  Configure Your Client Session
@@ -105,7 +105,7 @@ Once the PaymentMethoToken has been generated, you can safely pass it to your se
 
 ```java
 
-Nps nps = new Nps(getApplicationContext(), "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
+Nps nps = new Nps(Nps.SANDBOX, "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
 
 Card card = new Card()
         .setHolderName("John Smith")
@@ -166,7 +166,7 @@ Behaviour and capabilities of recache has been cloned from original createPaymen
 
 ```html
 <script>
-Nps nps = new Nps(getApplicationContext(), "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
+Nps nps = new Nps(Nps.SANDBOX, "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
 
 PaymentMethod paymentMethod = new PaymentMethod();
 paymentMethod.setId('51e0kuKSwkG3GlaGq2fQaNdBsfOY0EHY');
@@ -230,7 +230,7 @@ This method will also call the webservice method "GetIINDetails":
 [GetIINDetails (Response)](#panel-parameters-reference)
 
 ```java
-Nps nps = new Nps(getApplicationContext(), "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
+Nps nps = new Nps(Nps.SANDBOX, "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
 
 nps.getIINDetails('450799');
 ```
@@ -248,7 +248,7 @@ This validator checks if the security code is a valid integer (size 3-4 characte
 if you require card installment in the specific case that the customer must view the installment payment amount you can follow the next example:
 
 ```java
-Nps nps = new Nps(getApplicationContext(), "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
+Nps nps = new Nps(Nps.SANDBOX, "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
 nps.setAmount('120050');
 nps.setCountry('CHL');
 nps.setCurrency('152');
@@ -261,7 +261,7 @@ nps.getInstallmentsOptions('8T3BOsXaLMxVsvtHiSuWKL1DEOUUDq3N', '14', '3');
 You should configure the FULL payment amount as cents, to be able to accept installment to calculate the installment amount. To do this, use the call setAmount.
 
 ```java
-Nps nps = new Nps(getApplicationContext(), "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
+Nps nps = new Nps(Nps.SANDBOX, "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
 nps.setAmount('120050');
 ```
 
@@ -270,7 +270,7 @@ nps.setAmount('120050');
 You should configure the country where the payment is recieved, to be able to accept installment to calculate the installment amount. To do this, use the call setCountry.
 
 ```java
-Nps nps = new Nps(getApplicationContext(), "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
+Nps nps = new Nps(Nps.SANDBOX, "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
 nps.setCountry('CHL');
 ```
 
@@ -279,7 +279,7 @@ nps.setCountry('CHL');
 You should configure the currency wich the payment is processed in, to be able to accept installment to calculate the installment amount. To do this, use the call setCurrency.
 
 ```java
-Nps nps = new Nps(getApplicationContext(), "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
+Nps nps = new Nps(Nps.SANDBOX, "__YOUR_NPS_CLIENT_SESSION__", "__YOUR_NPS_MERCHANT_ID__");
 nps.setCurrency('152');
 ```
 
