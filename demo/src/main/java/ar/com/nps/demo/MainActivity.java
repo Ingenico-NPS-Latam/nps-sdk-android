@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                Nps nps = new Nps(getApplicationContext(), psp_ClientSession, psp_MerchantId);
+                Nps nps = new Nps(Nps.SANDBOX, psp_ClientSession, psp_MerchantId);
 
 
                 Log.d("validateNumber",String.valueOf(nps.validateCardNumber(inputCardNumber.getText().toString())));

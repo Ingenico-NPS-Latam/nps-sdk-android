@@ -106,7 +106,7 @@ public class WithInstallmentsActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                Nps nps = new Nps(getApplicationContext(), psp_ClientSession, psp_MerchantId);
+                Nps nps = new Nps(Nps.SANDBOX, psp_ClientSession, psp_MerchantId);
                 nps.setAmount("100000");
                 nps.setCountry("CHL");
                 nps.setCurrency("152");
