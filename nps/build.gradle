@@ -47,7 +47,7 @@ android {
     }
 
 
-    defaultPublishConfig "productionRelease"
+    //defaultPublishConfig "productionRelease"
     //publishNonDefault true
 
     /*
