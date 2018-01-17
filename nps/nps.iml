@@ -8,68 +8,33 @@
     </facet>
     <facet type="android" name="Android">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="sandboxRelease" />
-        <option name="ASSEMBLE_TASK_NAME" value="assembleSandboxRelease" />
-        <option name="COMPILE_JAVA_TASK_NAME" value="compileSandboxReleaseSources" />
+        <option name="SELECTED_BUILD_VARIANT" value="release" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleRelease" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileReleaseSources" />
         <afterSyncTasks>
-          <task>generateSandboxReleaseSources</task>
+          <task>generateReleaseSources</task>
         </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/sandbox/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
         <option name="PROJECT_TYPE" value="1" />
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/build/intermediates/classes/sandbox/release" />
-    <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/sandbox/release" />
+    <output url="file://$MODULE_DIR$/build/intermediates/classes/release" />
+    <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/release" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/sandbox/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/sandbox/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/sandbox/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/sandbox/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/sandbox/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/sandbox/release" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/sandbox/release" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sandboxRelease/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sandboxRelease/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sandboxRelease/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sandboxRelease/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sandboxRelease/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sandboxRelease/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sandboxRelease/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSandboxRelease/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSandboxRelease/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSandboxRelease/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSandboxRelease/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSandboxRelease/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSandboxRelease/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSandboxRelease/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sandbox/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sandbox/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sandbox/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sandbox/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sandbox/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sandbox/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sandbox/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestSandbox/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestSandbox/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestSandbox/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestSandbox/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestSandbox/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestSandbox/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestSandbox/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSandbox/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSandbox/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSandbox/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSandbox/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSandbox/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSandbox/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSandbox/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/release" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/release" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/assets" type="java-resource" />
@@ -124,6 +89,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/libs" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/build/poms" />
+      <excludeFolder url="file://$MODULE_DIR$/build/reports" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 25 Platform" jdkType="Android SDK" />

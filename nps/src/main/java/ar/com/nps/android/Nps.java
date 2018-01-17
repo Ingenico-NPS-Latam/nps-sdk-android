@@ -21,30 +21,33 @@ import java.util.Vector;
 
 public class Nps {
 	static public String PSP_VERSION = "2.2";
+	static public String SANDBOX = "https://sandbox.nps.com.ar/ws.php?wsdl";
+	static public String PRODUCTION = "https://services2.nps.com.ar/ws.php?wsdl";
+	static public String STAGING = "https://implementacion.nps.com.ar/ws.php?wsdl";
+	static public String DEV = "https://dev.nps.com.ar/ws.php?wsdl";
 
-	private Context context;
 	private String clientSession = "";
 	private String merchantId = "";
 	private String amount = "";
 	private String currency = "";
 	private String country = "";
+	private String environment = "";
 
-	public Nps(Context context, String clientSession, String merchantId) {
-		this.setContext(context);
+	public Nps(String environment, String clientSession, String merchantId) {
+		this.setEnvironment(environment);
 		this.setClientSession(clientSession);
 		this.setMerchantId(merchantId);
 	}
+        
+        
 
 	static public String getDeviceFingerprint(Context context) {
           return DevicePrint.ioBegin(context);
 	}
 
-	static public String getUrl(Context context) {
-        return context.getString(R.string.soap_url);
-    }
 
-    static public String getNamespace(Context context) {
-        return context.getString(R.string.soap_url);
+    public String getNamespace() {
+        return this.getEnvironment();
     }
 
 	static public String getPosDateTime() {
@@ -69,13 +72,13 @@ public class Nps {
 		this.merchantId = merchantId;
 	}
 
-	public Context getContext() {
-		return context;
+	public void setEnvironment(String environment) {
+		this.environment = environment;
 	}
-
-	public void setContext(Context context) {
-		this.context = context;
-	}
+        
+	public String getEnvironment() {
+		return environment;
+	}        
 	
 	public String getAmount() {
 		return amount;
@@ -102,7 +105,7 @@ public class Nps {
 	}	
 
 	public Card getIINDetails(String number) {
-		SoapObject Requerimiento = new SoapObject(Nps.getNamespace(this.getContext()), "GetIINDetails");
+		SoapObject Requerimiento = new SoapObject(this.getNamespace(), "GetIINDetails");
 		Requerimiento.addProperty("psp_Version",PSP_VERSION);
 		Requerimiento.addProperty("psp_MerchantId",this.getMerchantId());
 		Requerimiento.addProperty("psp_IIN",number);
@@ -110,10 +113,10 @@ public class Nps {
 		Requerimiento.addProperty("psp_ClientSession",this.getClientSession());
 
 
-		SoapObject request = new SoapObject(Nps.getNamespace(this.getContext()), "GetIINDetails");
+		SoapObject request = new SoapObject(this.getNamespace(), "GetIINDetails");
 		request.addProperty("Requerimiento",Requerimiento);
 
-		SoapObject response = send(this.getContext(), "GetIINDetails", request);
+		SoapObject response = send(this.getEnvironment(), "GetIINDetails", request);
 		String psp_ResponseCod = response.getPropertyAsString("psp_ResponseCod");
 
 		Card card = new Card();
@@ -124,7 +127,7 @@ public class Nps {
 	}
 	
 	public String getProduct(String number) {
-		SoapObject Requerimiento = new SoapObject(Nps.getNamespace(this.getContext()), "GetIINDetails");
+		SoapObject Requerimiento = new SoapObject(this.getNamespace(), "GetIINDetails");
 		Requerimiento.addProperty("psp_Version",PSP_VERSION);
 		Requerimiento.addProperty("psp_MerchantId",this.getMerchantId());
 		Requerimiento.addProperty("psp_IIN",number);
@@ -132,10 +135,10 @@ public class Nps {
 		Requerimiento.addProperty("psp_ClientSession",this.getClientSession());
 		
 		
-        SoapObject request = new SoapObject(Nps.getNamespace(this.getContext()), "GetIINDetails");
+        SoapObject request = new SoapObject(this.getNamespace(), "GetIINDetails");
       	request.addProperty("Requerimiento",Requerimiento);		
       	
-      	SoapObject response = send(this.getContext(), "GetIINDetails", request);
+      	SoapObject response = send(this.getEnvironment(), "GetIINDetails", request);
         String psp_ResponseCod = response.getPropertyAsString("psp_ResponseCod");
 
         String psp_Product = "";
@@ -146,7 +149,7 @@ public class Nps {
 	}
 	
 	public ArrayList<InstallmentOption> getInstallmentsOptions(String psp_PaymentMethodToken, String psp_Product, String psp_NumPayments) {
-		SoapObject Requerimiento = new SoapObject(Nps.getNamespace(this.getContext()), "GetInstallmentsOptions");
+		SoapObject Requerimiento = new SoapObject(this.getNamespace(), "GetInstallmentsOptions");
 		Requerimiento.addProperty("psp_Version",PSP_VERSION);
 		Requerimiento.addProperty("psp_MerchantId",this.getMerchantId());
 		Requerimiento.addProperty("psp_Amount",this.getAmount());
@@ -158,10 +161,10 @@ public class Nps {
 		Requerimiento.addProperty("psp_PosDateTime",Nps.getPosDateTime());
 		Requerimiento.addProperty("psp_NumPayments",psp_NumPayments);
 		
-        SoapObject request = new SoapObject(Nps.getNamespace(this.getContext()), "GetInstallmentsOptions");
+        SoapObject request = new SoapObject(this.getNamespace(), "GetInstallmentsOptions");
       	request.addProperty("Requerimiento",Requerimiento);		
       	
-      	SoapObject response = send(this.getContext(), "GetInstallmentsOptions", request);
+      	SoapObject response = send(this.getEnvironment(), "GetInstallmentsOptions", request);
       	String psp_ResponseCod = response.getPropertyAsString("psp_ResponseCod");
       	
       	if(Integer.parseInt(psp_ResponseCod) == 2) {
@@ -189,7 +192,7 @@ public class Nps {
 	}
 
 	public void recachePaymentMethodToken(PaymentMethod paymentMethod, Billing billing,  ResponseHandler responseHandler) {
-		SoapObject Requerimiento = new SoapObject(Nps.getNamespace(this.getContext()), "RecachePaymentMethodToken");
+		SoapObject Requerimiento = new SoapObject(this.getNamespace(), "RecachePaymentMethodToken");
 		Requerimiento.addProperty("psp_Version", PSP_VERSION);
 		Requerimiento.addProperty("psp_MerchantId", this.getMerchantId());
 		Requerimiento.addProperty("psp_PaymentMethodId", paymentMethod.getId());
@@ -208,10 +211,10 @@ public class Nps {
             Requerimiento.addProperty("psp_Address", billing.getAddress());
         }
 
-		SoapObject request = new SoapObject(Nps.getNamespace(this.getContext()), "RecachePaymentMethodToken");
+		SoapObject request = new SoapObject(this.getNamespace(), "RecachePaymentMethodToken");
 		request.addProperty("Requerimiento", Requerimiento);
 
-		SoapObject response = send(this.getContext(), "RecachePaymentMethodToken", request);
+		SoapObject response = send(this.getEnvironment(), "RecachePaymentMethodToken", request);
 		String psp_ResponseCod = response.getPropertyAsString("psp_ResponseCod");
 
 		if(Integer.parseInt(psp_ResponseCod) == 2) {
@@ -247,7 +250,7 @@ public class Nps {
 	
 	public void createPaymentMethodToken(Card card, Billing billing, ResponseHandler responseHandler) {
         android.util.Log.d("nps","entre a createPaymentMethodToken");
-		SoapObject Requerimiento = new SoapObject(Nps.getNamespace(this.getContext()), "CreatePaymentMethodToken");
+		SoapObject Requerimiento = new SoapObject(this.getNamespace(), "CreatePaymentMethodToken");
 		Requerimiento.addProperty("psp_Version",PSP_VERSION);
 		Requerimiento.addProperty("psp_MerchantId",this.getMerchantId());
 		Requerimiento.addProperty("psp_CardInputDetails",card);
@@ -266,10 +269,10 @@ public class Nps {
         }
 
 
-        SoapObject request = new SoapObject(Nps.getNamespace(this.getContext()), "CreatePaymentMethodToken");
+        SoapObject request = new SoapObject(this.getNamespace(), "CreatePaymentMethodToken");
       	request.addProperty("Requerimiento",Requerimiento);		
       	
-      	SoapObject response = send(this.getContext(), "CreatePaymentMethodToken", request);
+      	SoapObject response = send(this.getEnvironment(), "CreatePaymentMethodToken", request);
 
       	// Log.d("createPaymentMethodToken","despues de obtener el response");
 
@@ -309,7 +312,7 @@ public class Nps {
       	
 	}	
 	
-	static public SoapObject send(Context context, String method, SoapObject request) {
+	static public SoapObject send(String environment, String method, SoapObject request) {
 
 	    SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER10);
 	    envelope.dotNet = false;
@@ -319,9 +322,9 @@ public class Nps {
 
 	    FakeX509TrustManager.allowAllSSL();
 
-        Log.d("nps.send",Nps.getUrl(context));
+        Log.d("nps.send",environment);
 
-	    HttpTransportSE ht = new HttpTransportSE(Nps.getUrl(context),30000);
+	    HttpTransportSE ht = new HttpTransportSE(environment,30000);
 	    ht.debug = true;
 	    ht.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 	      	
@@ -330,7 +333,7 @@ public class Nps {
 
             Log.d("Nps Ws Request",request.toString());
 
-	        ht.call(Nps.getUrl(context) + "/" + method, envelope);
+	        ht.call(environment + "/" + method, envelope);
 
 	        Log.d("Nps","DESPUES DEL CALL");
 
