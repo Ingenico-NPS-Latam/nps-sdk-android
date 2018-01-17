@@ -44,12 +44,13 @@ afterEvaluate { project ->
                 pom.artifactId = "nps-sdk-android"
                 pom.version = "1.0.27"
 
+                /*
                 repository(url: getReleaseRepositoryUrl()) {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
                 snapshotRepository(url: getSnapshotRepositoryUrl()) {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
-                }
+                }*/
 
                 pom.project {
                     name POM_NAME
