@@ -42,8 +42,8 @@ public class NpsTest {
 
     @Before
     public void setup() {
-        when(mMockContext.getString(R.string.soap_url))
-                .thenReturn("https://dev.nps.com.ar/ws.php");
+        //when(mMockContext.getString(R.string.soap_url))
+        //        .thenReturn("https://dev.nps.com.ar/ws.php");
 
         if(isFirstRun){
             init();
@@ -188,11 +188,11 @@ public class NpsTest {
         nps.createPaymentMethodToken(card, billing, responseHandler);
 
     }
-
+    /*
     @Test
     public void getDeviceFingerprint() throws Exception {
         assertTrue(Nps.getDeviceFingerprint(mMockContext) != null);
-    }
+    }*/
 
     @Test
     public void getIINDetails() throws Exception {
