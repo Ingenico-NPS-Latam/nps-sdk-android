@@ -48,10 +48,10 @@ android {
     }
 
 
-    //defaultPublishConfig "productionRelease"
+    defaultPublishConfig "productionRelease"
     //publishNonDefault true
 
-    /*
+
     productFlavors {
         production {
 
@@ -64,8 +64,8 @@ android {
         }
         dev {
 
-        }
-    }*/
+        }*/
+    }
 }
 
 task wrapper(type: Wrapper) {
