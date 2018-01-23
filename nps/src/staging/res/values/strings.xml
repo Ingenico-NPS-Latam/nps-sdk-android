@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">NPS Demo (stating)</string>
-    <string name="soap_url">https://implementacion.nps.com.ar/ws.php?wsdl</string>
-</resources>

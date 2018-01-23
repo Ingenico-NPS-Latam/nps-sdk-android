@@ -6,16 +6,22 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.github.ingeniconpslatam.nps.Nps;
-
 import com.github.ingeniconpslatam.nps.Card;
+import com.github.ingeniconpslatam.nps.Nps;
 import com.github.ingeniconpslatam.nps.PaymentMethodToken;
 
-public class MainActivity extends Activity {
+import java.util.ArrayList;
+
+
+
+public class DevActivity extends Activity {
     private TextView txtResultado;
 
 
@@ -33,18 +39,10 @@ public class MainActivity extends Activity {
         StrictMode.setThreadPolicy(policy);
         }
 
-        /**
-         * Configure Your Client Session
-         *
-         * You should configure your client session to be able to start to use NPS.js to identify your site while communicating with NPS. 
-         * To do this, use the call setClientSession. 
-         * Remember to replace the client session call on sandbox with the production domain when you are ready to create real charges.
-        */
-        final String psp_ClientSession = "__YOUR_CLIENT_SESSION__";
-        
-        final String psp_MerchantId = "__YOUR_MERCHANT_ID__";
-        final String secretCode = "__YOUR_SECRET_CODE__";
-        final String psp_CustomerId = "__YOUR_CUSTOMER_ID__";
+        final String psp_MerchantId = "psp_test";
+        final String secretCode = "IeShlZMDk8mp8VA6vy41mLnVggnj1yqHcJyNqIYaRINZnXdiTfhF0Ule9WNAUCR6";
+        final String psp_ClientSession = DemoHelpers.CreateClientSession(Nps.SANDBOX, psp_MerchantId, secretCode);
+        final String psp_CustomerId = DemoHelpers.CreateCustomer(Nps.SANDBOX, psp_MerchantId, secretCode);
 
         final EditText inputCardNumber = (EditText)findViewById(R.id.card_number);
         final EditText inputCardHolderName = (EditText)findViewById(R.id.card_holder_name);
@@ -52,7 +50,6 @@ public class MainActivity extends Activity {
         final EditText inputCardSecurityCode = (EditText)findViewById(R.id.card_security_code);
         Button btn = (Button)findViewById(R.id.send);
         final TextView cardAnswer = (TextView)findViewById(R.id.card_answer);
-
 
         btn.setOnClickListener(new View.OnClickListener() {
 
@@ -85,7 +82,6 @@ public class MainActivity extends Activity {
                         cardAnswer.setText(error.getMessage());
                     }
                 };
-
 
 
                     Card card = new Card()

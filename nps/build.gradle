@@ -1,45 +1,47 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
 
-
 configurations {
     javadocDeps
 }
 
 repositories {
     flatDir {
-        dirs project(':nps').file('libs')
+        dirs 'libs'
     }
 }
 
 dependencies {
     compile files('libs/ksoap2-android-assembly-3.6.2-jar-with-dependencies.jar')
-    compile 'junit:junit:4.12'
+    compile files('libs/deviceprint-lib-release-2.3.3.jar')
     compile 'org.mockito:mockito-core:2.6.3'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    compile 'junit:junit:4.12'
 }
 
-fileTree(dir: 'libs', include: '**/*.aar')
-        .each { File file ->
-    dependencies.add("compile", [
-            name: file.name.lastIndexOf('.').with { it != -1 ? file.name[0..<it] : file.name },
-            ext: 'aar'
-    ])
-}
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
-      minSdkVersion 11
-      targetSdkVersion 25
-      multiDexEnabled true
-    }
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
 
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -47,30 +49,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
-
-
-    //defaultPublishConfig "productionRelease"
-    //publishNonDefault true
-
-    /*
-    productFlavors {
-        /*    production {
-
-            }
-            /*staging {
-
-            }
-            sandbox {
-
-            }
-            dev {
-
-            }
-    }*/
+    lintOptions{
+        abortOnError false
+    }
 }
-/*
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.4.1'
-}
-*/
-//apply from: 'deploy.gradle'
+apply from: '../deploy.gradle'

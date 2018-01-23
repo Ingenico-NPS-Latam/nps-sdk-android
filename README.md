@@ -33,21 +33,41 @@ With this One-time-use PaymentMethodToken, you can do anything with our API that
 12. Merchant Backend sends payment response to customer device.
 13. And finally customer device shows payment response to the customer 
 
-##  Installation
+## Installation
     
-To get started install on your Android API following the next steps:
+To get started install on your Android API the NPS android sdk. You can choose to clone or download from github or use compile:
 
-###  Android Studio
+### Compile
 
-1. Clone this project
-2. On your Android Studio go to: File -> New -> Import Module and find conektasdk folder on your file system.
-3. Go to File -> Project Structure..., this will open a window, then choose on Modules section your app, click on Dependencies tab,  click on "+" button, and finally on Module dependency dialog choose nps-sdk.
-
-Add the nps-android-sdk dependency to the build.gradle file.
+just add the nps-android-sdk dependency to your build.gradle file.
 
 ```bash
-compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.2'
+compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.44'
 ```
+
+### Github
+
+1. Clone or download the project from [github](https://github.com/Ingenico-NPS-Latam/nps-sdk-android)
+2. On your Android Studio go to: File -> New -> Import Module and find nps-sdk-android folder on your file system.
+3. Go to File -> Project Structure..., this will open a window, then choose on Modules section your app, click on Dependencies tab,  click on "+" button, and finally on Module dependency dialog choose nps-sdk.
+
+```bash
+compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.44'
+```
+
+### Github Demo
+
+Ingenico Nps Latam has a demo project where the developers can read the code of a working app integrated with our platform
+
+1. Clone or download the project from [github](https://github.com/Ingenico-NPS-Latam/nps-sdk-android)
+2. Open the project with Android Studio.
+3. Add to the Demo build.gradle file the nps-sdk-android dependency and sync the project
+
+```bash
+compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.44'
+```
+
+
 
 ##  Integrate
 
@@ -62,11 +82,11 @@ Declare the necessary permissions for your Android Project by adding the followi
 Import all nps classes from ar.com.nps namespace
 
 ```java
-import ar.com.nps.android.Card;
-import ar.com.nps.android.InstallmentOption;
-import ar.com.nps.android.Nps;
-import ar.com.nps.android.PaymentMethod;
-import ar.com.nps.android.PaymentMethodToken;
+import com.github.ingeniconpslatam.nps.Card;
+import com.github.ingeniconpslatam.nps.InstallmentOption;
+import com.github.ingeniconpslatam.nps.Nps;
+import com.github.ingeniconpslatam.nps.PaymentMethod;
+import com.github.ingeniconpslatam.nps.PaymentMethodToken;
 ```
 
 ##  Configure
