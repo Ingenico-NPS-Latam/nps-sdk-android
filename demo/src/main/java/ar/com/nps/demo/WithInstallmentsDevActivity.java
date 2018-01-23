@@ -21,8 +21,7 @@ import com.github.ingeniconpslatam.nps.Nps;
 import com.github.ingeniconpslatam.nps.PaymentMethod;
 import com.github.ingeniconpslatam.nps.PaymentMethodToken;
 
-
-public class WithInstallmentsActivity extends Activity {
+public class WithInstallmentsDevActivity extends Activity {
     private TextView txtResultado;
 
 
@@ -40,18 +39,10 @@ public class WithInstallmentsActivity extends Activity {
         StrictMode.setThreadPolicy(policy);
         }
 
-        /**
-         * Configure Your Client Session
-         *
-         * You should configure your client session to be able to start to use NPS.js to identify your site while communicating with NPS. 
-         * To do this, use the call setClientSession. 
-         * Remember to replace the client session call on sandbox with the production domain when you are ready to create real charges.
-        */
-        final String psp_ClientSession = "__YOUR_CLIENT_SESSION__";
-        
-        final String psp_MerchantId = "__YOUR_MERCHANT_ID__";
-        final String secretCode = "__YOUR_SECRET_CODE__";
-        final String psp_CustomerId = "__YOUR_CUSTOMER_ID__";
+        final String psp_MerchantId = "psp_test";
+        final String secretCode = "IeShlZMDk8mp8VA6vy41mLnVggnj1yqHcJyNqIYaRINZnXdiTfhF0Ule9WNAUCR6";
+        final String psp_ClientSession = DemoHelpers.CreateClientSession(Nps.SANDBOX, psp_MerchantId, secretCode);
+        final String psp_CustomerId = DemoHelpers.CreateCustomer(Nps.SANDBOX, psp_MerchantId, secretCode);
 
         final EditText inputCardNumber = (EditText)findViewById(R.id.card_number);
         final EditText inputCardHolderName = (EditText)findViewById(R.id.card_holder_name);
@@ -67,7 +58,7 @@ public class WithInstallmentsActivity extends Activity {
 
 
         final ArrayList<String> arrayPaymentMethods = new ArrayList<String>();
-        ArrayList<PaymentMethod> paymentMethods = new ArrayList<PaymentMethod>();
+        ArrayList<PaymentMethod> paymentMethods = DemoHelpers.RetrievePaymentMethods(Nps.SANDBOX, psp_MerchantId, psp_CustomerId, psp_ClientSession);
         final Spinner inputPaymentMethods = (Spinner)findViewById(R.id.payment_methods);
         String[] inputPaymentMethodsItems = new String[paymentMethods.size()+1];
         inputPaymentMethodsItems[0] = "New Card";
