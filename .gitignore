@@ -11,3 +11,4 @@ svn-ignore.txt
 gradle.properties
 nps/gradle.properties
 .idea/
+update_library_instructions.txt
