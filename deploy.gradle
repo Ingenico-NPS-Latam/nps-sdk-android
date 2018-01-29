@@ -42,7 +42,7 @@ afterEvaluate { project ->
 
                 pom.groupId = "com.github.ingenico-nps-latam"
                 pom.artifactId = "nps-sdk-android"
-                pom.version = "1.0.44"
+                pom.version = "1.0.45"
 
                 repository(url: getReleaseRepositoryUrl()) {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
