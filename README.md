@@ -61,18 +61,6 @@ maven { url "https://oss.sonatype.org/content/repositories/ksoap2-android-releas
 compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.46'
 ```
 
-### Github Demo
-
-Ingenico Nps Latam has a demo project where the developers can read the code of a working app integrated with our platform
-
-1. Clone or download the project from [github](https://github.com/Ingenico-NPS-Latam/nps-sdk-android)
-2. Open the project with Android Studio.
-3. Add to the Demo build.gradle file the nps-sdk-android dependency and sync the project
-
-```bash
-compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.46'
-```
-
 ##  Integrate
 
 Declare the necessary permissions for your Android Project by adding the following lines to app/src/AndroidManifest.xml, inside the <application> tags.
