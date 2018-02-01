@@ -5,6 +5,9 @@ import android.content.Context;
 import android.util.Log;
 
 import com.iovation.mobile.android.DevicePrint;
+//import com.iovation.mobile.android.FraudForceManager;
+//import com.iovation.mobile.android.FraudForceConfiguration;
+
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;

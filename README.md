@@ -42,7 +42,7 @@ To get started install on your Android API the NPS android sdk. You can choose t
 just add the nps-android-sdk dependency to your build.gradle file.
 
 ```bash
-compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.45'
+compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.46'
 ```
 
 ### Github
@@ -52,7 +52,7 @@ compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.45'
 3. Go to File -> Project Structure..., this will open a window, then choose on Modules section your app, click on Dependencies tab,  click on "+" button, and finally on Module dependency dialog choose nps-sdk.
 
 ```bash
-compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.45'
+compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.46'
 ```
 
 ### Github Demo
@@ -64,7 +64,7 @@ Ingenico Nps Latam has a demo project where the developers can read the code of 
 3. Add to the Demo build.gradle file the nps-sdk-android dependency and sync the project
 
 ```bash
-compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.45'
+compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.46'
 ```
 
 
@@ -79,7 +79,14 @@ Declare the necessary permissions for your Android Project by adding the followi
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 ```
 
-Import all nps classes from ar.com.nps namespace
+Add to yours APK build.gradle this repository
+
+```java
+maven { url 'https://oss.sonatype.org/content/repositories/ksoap2-android-releases/' }
+```
+
+
+Import all nps classes from com.github.ingeniconpslatam.nps namespace
 
 ```java
 import com.github.ingeniconpslatam.nps.Card;
