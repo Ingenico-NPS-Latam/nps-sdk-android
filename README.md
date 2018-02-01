@@ -39,10 +39,16 @@ To get started install on your Android API the NPS android sdk. You can choose t
 
 ### Compile
 
-just add the nps-android-sdk dependency to your build.gradle file.
+Add the nps-android-sdk dependency to your build.gradle file.
 
 ```bash
 compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.46'
+```
+
+Add to yours APK build.gradle this repository
+
+```java
+maven { url "https://oss.sonatype.org/content/repositories/ksoap2-android-releases/" }
 ```
 
 ### Github
@@ -67,8 +73,6 @@ Ingenico Nps Latam has a demo project where the developers can read the code of 
 compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.46'
 ```
 
-
-
 ##  Integrate
 
 Declare the necessary permissions for your Android Project by adding the following lines to app/src/AndroidManifest.xml, inside the <application> tags.
@@ -79,10 +83,14 @@ Declare the necessary permissions for your Android Project by adding the followi
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 ```
 
-Add to yours APK build.gradle this repository
+Import all nps classes from com.github.ingeniconpslatam.nps namespace
 
 ```java
-maven { url "https://oss.sonatype.org/content/repositories/ksoap2-android-releases/" }
+import com.github.ingeniconpslatam.nps.Card;
+import com.github.ingeniconpslatam.nps.InstallmentOption;
+import com.github.ingeniconpslatam.nps.Nps;
+import com.github.ingeniconpslatam.nps.PaymentMethod;
+import com.github.ingeniconpslatam.nps.PaymentMethodToken;
 ```
 
 ### Github Demo
@@ -95,17 +103,6 @@ Ingenico Nps Latam has a demo project where the developers can read the code of 
 
 ```bash
 compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.46'
-```
-
-
-Import all nps classes from com.github.ingeniconpslatam.nps namespace
-
-```java
-import com.github.ingeniconpslatam.nps.Card;
-import com.github.ingeniconpslatam.nps.InstallmentOption;
-import com.github.ingeniconpslatam.nps.Nps;
-import com.github.ingeniconpslatam.nps.PaymentMethod;
-import com.github.ingeniconpslatam.nps.PaymentMethodToken;
 ```
 
 ##  Configure
