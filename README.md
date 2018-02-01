@@ -82,7 +82,7 @@ Declare the necessary permissions for your Android Project by adding the followi
 Add to yours APK build.gradle this repository
 
 ```java
-maven { url 'https://oss.sonatype.org/content/repositories/ksoap2-android-releases/' }
+maven { url "https://oss.sonatype.org/content/repositories/ksoap2-android-releases/" }
 ```
 
 
