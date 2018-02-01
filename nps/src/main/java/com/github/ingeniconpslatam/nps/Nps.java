@@ -2,6 +2,7 @@ package com.github.ingeniconpslatam.nps;
 
 
 import android.content.Context;
+import android.os.StrictMode;
 import android.util.Log;
 
 import com.iovation.mobile.android.DevicePrint;
@@ -40,6 +41,11 @@ public class Nps {
 		this.setEnvironment(environment);
 		this.setClientSession(clientSession);
 		this.setMerchantId(merchantId);
+		if (android.os.Build.VERSION.SDK_INT > 9)
+		{
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+			StrictMode.setThreadPolicy(policy);
+		}
 	}
         
         
