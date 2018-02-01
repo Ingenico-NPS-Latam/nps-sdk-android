@@ -190,11 +190,11 @@ public class NpsTest {
         nps.createPaymentMethodToken(card, billing, responseHandler);
 
     }
-    /*
+
     @Test
     public void getDeviceFingerprint() throws Exception {
         assertTrue(Nps.getDeviceFingerprint(mMockContext) != null);
-    }*/
+    }
 
     @Test
     public void getIINDetails() throws Exception {
