@@ -1,1 +1,1 @@
-include ':nps', ':demo'
+include ':nps'
