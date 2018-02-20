@@ -13,3 +13,4 @@ nps/gradle.properties
 .idea/
 update_library_instructions.txt
 nps/nps.iml
+*.jks

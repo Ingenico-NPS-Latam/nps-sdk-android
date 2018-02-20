@@ -12,18 +12,29 @@ dependencies {
 }
 
 android {
+    signingConfigs {
+        gustavo {
+            keyAlias 'gustavo'
+            keyPassword 'gustavo'
+            storeFile file('/home/inge/Documents/svn/psp/trunk/sdks/Android/releasekey.jks')
+            storePassword 'gustavo'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion '26.0.2'
-
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
         multiDexEnabled true
     }
-
-    lintOptions{
+    lintOptions {
         abortOnError false
     }
-
-
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.gustavo
+        }
+    }
 }

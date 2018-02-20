@@ -1,25 +1,40 @@
-# Add project specific ProGuard rules here.
-# By default, the flags in this file are appended to flags specified
-# in /home/inge/Android/Sdk/tools/proguard/proguard-android.txt
-# You can edit the include path and order by changing the proguardFiles
-# directive in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+-keep class android.net.http.** { *; }
+-keep class org.apache.http.** { *; }
+-keep class org.kobjects.** { *; }
+-keep class org.ksoap2.** { *; }
+-keep class org.kxml2.** { *; }
+-keep class org.xmlpull.** { *; }
+-keep class okhttp3.OkHttpClient { *; }
 
-# Add any project specific keep options here:
+-dontwarn sun.reflect.**
+-dontwarn android.test.**
+-dontwarn org.mockito.**
+-dontwarn okhttp3.internal.**
+-dontwarn okhttp3.**
+-dontwarn net.bytebuddy.**
+-dontwarn okio.**
+-dontwarn org.junit.**
+-dontwarn org.xmlpull.v1.**
+-dontwarn org.objenesis.**
+-dontwarn org.apache.http.**
+-dontwarn android.net.http.**
+-dontwarn junit.runner.**
+-dontwarn junit.framework.**
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+-dontnote sun.reflect.**
+-dontnote android.test.**
+-dontnote org.mockito.**
+-dontnote okhttp3.internal.**
+-dontnote okhttp3.**
+-dontnote net.bytebuddy.**
+-dontnote okio.**
+-dontnote org.junit.**
+-dontnote org.xmlpull.v1.**
+-dontnote org.objenesis.**
+-dontnote org.apache.http.**
+-dontnote android.net.http.**
+-dontnote junit.runner.**
+-dontnote junit.framework.**
+-dontnote org.kobjects.**
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
