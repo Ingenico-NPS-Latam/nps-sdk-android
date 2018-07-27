@@ -1,6 +1,6 @@
 siteUrl = https://github.com/Ingenico-NPS-Latam/nps-sdk-android
 gitUrl = https://github.com/Ingenico-NPS-Latam/nps-sdk-android.git 
-version = 1.0.56
+version = 1.0.57
 groupId = com.github.ingenico-nps-latam
 licenses = ['GPL-3.0'] // or something else 
 id = nps-sdk-android
