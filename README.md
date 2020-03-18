@@ -42,7 +42,7 @@ To get started install on your Android API the NPS android sdk. You can choose t
 Add the nps-android-sdk dependency to your build.gradle file.
 
 ```bash
-compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.57'
+compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.1.0'
 ```
 
 Add to yours APK build.gradle this repository
@@ -58,7 +58,7 @@ maven { url "https://oss.sonatype.org/content/repositories/ksoap2-android-releas
 3. Go to File -> Project Structure..., this will open a window, then choose on Modules section your app, click on Dependencies tab,  click on "+" button, and finally on Module dependency dialog choose nps-sdk.
 
 ```bash
-compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.57'
+compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.1.0'
 ```
 
 ##  Integrate
@@ -90,7 +90,7 @@ Ingenico Nps Latam has a demo project where the developers can read the code of 
 3. Add to the Demo build.gradle file the nps-sdk-android dependency and sync the project
 
 ```bash
-compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.0.57'
+compile 'com.github.ingenico-nps-latam:nps-sdk-android:1.1.0'
 ```
 
 ##  Configure
