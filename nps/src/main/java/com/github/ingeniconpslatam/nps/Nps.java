@@ -177,11 +177,9 @@ public class Nps {
       	String psp_ResponseCod = response.getPropertyAsString("psp_ResponseCod");
       	
       	if(Integer.parseInt(psp_ResponseCod) == 2) {
-      		Log.d("Nps","tengo responsecod 2 para getinstallmentoptions");
+      		Log.d("Nps","Installments Options request: OK");
       		
       		Vector<SoapObject> psp_InstallmentsOptions = (Vector<SoapObject>) response.getProperty("psp_InstallmentsOptions");
-      		
-      		Log.d("Nps","tengo el soapobject");
       		
       		ArrayList<InstallmentOption> installmentOptionList = new ArrayList<InstallmentOption>();
       		for (SoapObject soapObject : psp_InstallmentsOptions) {
@@ -192,10 +190,8 @@ public class Nps {
       		}
       		return installmentOptionList;
       	}else {
-            Log.d("Nps","Tengo un error no-bloqueante[" + response.getPropertyAsString("psp_ResponseMsg") + "]");
+            Log.d("Nps","Unable to retrieve installments [" + response.getPropertyAsString("psp_ResponseMsg") + "]");
         }
-      	
-      	Log.d("Nps","Dentro de getInstallmentsOptions todo bien!");
 
       	return new ArrayList<InstallmentOption>();
 	}
@@ -227,28 +223,16 @@ public class Nps {
 		String psp_ResponseCod = response.getPropertyAsString("psp_ResponseCod");
 
 		if(Integer.parseInt(psp_ResponseCod) == 2) {
-			// Log.d("createPaymentMethodToken","el cod es 2");
-
-
 			String psp_PaymentMethodToken = response.getPropertyAsString("psp_PaymentMethodToken");
             paymentMethod.setProduct(response.getPropertyAsString("psp_Product"));
-
-			// Log.d("createPaymentMethodToken","voy a crear el objeto PaymentMethodToken");
-
-			PaymentMethodToken paymentMethodToken = new PaymentMethodToken()
-					.setId(psp_PaymentMethodToken)
-					.setUsed(false)
-					.setObject("paymentMethodToken");
-
-			// Log.d("createPaymentMethodToken","creé el objeto PaymentMethodToken");
+			PaymentMethodToken paymentMethodToken = new PaymentMethodToken();
+			paymentMethodToken.hydrate(response);
 
 
 			if(this.getCountry() == "CHL") {
 				ArrayList<InstallmentOption> installmentOptionsList = this.getInstallmentsOptions(psp_PaymentMethodToken, paymentMethod.getProduct(), paymentMethod.getCardNumPayments());
 				paymentMethodToken.setInstallmentOptions(installmentOptionsList);
 			}
-
-			// Log.d("createPaymentMethodToken","paso el objeto PaymentMethodToken al responseHandler");
 
 			responseHandler.onSuccess(paymentMethodToken);
 		}else {
@@ -282,36 +266,17 @@ public class Nps {
       	request.addProperty("Requerimiento",Requerimiento);		
       	
       	SoapObject response = send(this.getEnvironment(), "CreatePaymentMethodToken", request);
-
-      	// Log.d("createPaymentMethodToken","despues de obtener el response");
-
       	String psp_ResponseCod = response.getPropertyAsString("psp_ResponseCod");
-
-      	// Log.d("createPaymentMethodToken","El valor del cod [" + psp_ResponseCod + "]");
-
       	if(Integer.parseInt(psp_ResponseCod) == 2) {
-      		// Log.d("createPaymentMethodToken","el cod es 2");
-
-
       		String psp_PaymentMethodToken = response.getPropertyAsString("psp_PaymentMethodToken");
             card.setProduct(response.getPropertyAsString("psp_Product"));
-
-      		// Log.d("createPaymentMethodToken","voy a crear el objeto PaymentMethodToken");
-
-      		PaymentMethodToken paymentMethodToken = new PaymentMethodToken()
-  			  .setId(psp_PaymentMethodToken)
-  			  .setUsed(false)
-  			  .setObject("paymentMethodToken"); 
-
-      		// Log.d("createPaymentMethodToken","creé el objeto PaymentMethodToken");
-
+      		PaymentMethodToken paymentMethodToken = new PaymentMethodToken();
+      		paymentMethodToken.hydrate(response);
 
       		if(this.getCountry() == "CHL") {
 	      		ArrayList<InstallmentOption> installmentOptionsList = this.getInstallmentsOptions(psp_PaymentMethodToken, card.getProduct(), card.getNumPayments());
 	      		paymentMethodToken.setInstallmentOptions(installmentOptionsList);
       		}
-
-      		// Log.d("createPaymentMethodToken","paso el objeto PaymentMethodToken al responseHandler");
 
       		responseHandler.onSuccess(paymentMethodToken);
       	}else {
@@ -319,7 +284,38 @@ public class Nps {
       	}
       	
       	
-	}	
+	}
+
+	public void retrievePaymentMethodToken(String paymentMethodToken, ResponseHandler responseHandler) {
+		Log.d("nps","entre a createPaymentMethodToken");
+		SoapObject Requerimiento = new SoapObject(this.getNamespace(), "CreatePaymentMethodToken");
+		Requerimiento.addProperty("psp_Version",PSP_VERSION);
+		Requerimiento.addProperty("psp_MerchantId",this.getMerchantId());
+		Requerimiento.addProperty("psp_PaymentMethodToken",paymentMethodToken);
+		Requerimiento.addProperty("psp_ClientSession",this.getClientSession());
+
+		SoapObject request = new SoapObject(this.getNamespace(), "RetrievePaymentMethodToken");
+		request.addProperty("Requerimiento",Requerimiento);
+
+		SoapObject response = send(this.getEnvironment(), "RetrievePaymentMethodToken", request);
+		String psp_ResponseCod = response.getPropertyAsString("psp_ResponseCod");
+		if(Integer.parseInt(psp_ResponseCod) == 2) {
+			String psp_PaymentMethodToken = response.getPropertyAsString("psp_PaymentMethodToken");
+
+			PaymentMethodToken pmt = new PaymentMethodToken();
+//  			  .setId(psp_PaymentMethodToken)
+//  			  .setUsed(false)
+//  			  .setObject("paymentMethodToken");
+
+			pmt.hydrate(response);
+
+			responseHandler.onSuccess(pmt);
+		}else {
+			responseHandler.onError(new Exception(response.getPropertyAsString("psp_ResponseCod") + " " + response.getPropertyAsString("psp_ResponseMsg")));
+		}
+
+
+	}
 	
 	static public SoapObject send(String environment, String method, SoapObject request) {
 
@@ -338,31 +334,29 @@ public class Nps {
 	    ht.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 	      	
 	    try {
-	    	Log.d("Nps","ANTES DEL CALL");
+	    	Log.d("Nps","Starting request");
 
-            Log.d("Nps Ws Request",request.toString());
+//            Log.d("Nps Ws Request",request.toString());
 
 	        ht.call(environment + "/" + method, envelope);
 
-	        Log.d("Nps","DESPUES DEL CALL");
+	        Log.d("Nps","Call Finished");
 
 
 	        if (envelope.bodyIn instanceof SoapObject) { // SoapObject =
                 Log.d("Nps Ws Response",envelope.getResponse().toString());
 				SoapObject response = (SoapObject) envelope.getResponse();
-				Log.d("Nps","TENGO EL OBJETO DE LA RESPUESTA");
-
 				return response;
 		    }
 	        
         } catch (SocketTimeoutException t) {
-        	Log.d("Nps","pase por aca 1");
+        	Log.d("Nps",t.getMessage());
             t.printStackTrace();
         } catch (IOException i) {
-        	Log.d("Nps","pase por aca 2");
+        	Log.d("Nps",i.getMessage());
             i.printStackTrace();
         } catch (Exception q) {
-        	Log.d("Nps","pase por aca 3");
+        	Log.d("Nps",q.getMessage());
             q.printStackTrace();
         }            	    
 	    		
