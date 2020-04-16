@@ -15,3 +15,4 @@ update_library_instructions.txt
 nps/nps.iml
 *.jks
 build/*
+nps/*.iml
