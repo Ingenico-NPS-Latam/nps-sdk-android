@@ -5,9 +5,8 @@ import android.content.Context;
 import android.os.StrictMode;
 import android.util.Log;
 
-import com.iovation.mobile.android.DevicePrint;
-//import com.iovation.mobile.android.FraudForceManager;
-//import com.iovation.mobile.android.FraudForceConfiguration;
+import com.iovation.mobile.android.FraudForceManager;
+import com.iovation.mobile.android.FraudForceConfiguration;
 
 
 import org.ksoap2.SoapEnvelope;
@@ -36,6 +35,8 @@ public class Nps {
 	private String currency = "";
 	private String country = "";
 	private String environment = "";
+	private FraudForceManager x;
+	private FraudForceConfiguration ffConf;
 
 	public Nps(String environment, String clientSession, String merchantId) {
 		this.setEnvironment(environment);
@@ -51,7 +52,13 @@ public class Nps {
         
 
 	static public String getDeviceFingerprint(Context context) {
-          return DevicePrint.ioBegin(context);
+		FraudForceConfiguration configuration = new FraudForceConfiguration.Builder()
+//				.subscriberKey([YOUR-SUBSCRIBER-KEY-HERE])
+//    			.enableNetworkCalls(true) // Defaults to false if left out of configuration
+				.build();
+		FraudForceManager fraudForceManager = FraudForceManager.getInstance();
+		fraudForceManager.initialize(configuration, context);
+		return FraudForceManager.getInstance().getBlackbox(context);
 	}
 
 

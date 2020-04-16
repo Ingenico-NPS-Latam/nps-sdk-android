@@ -397,7 +397,8 @@ public class NpsTest {
 
     @Test
     public void getDeviceFingerprint() throws Exception {
-        //assertTrue(Nps.getDeviceFingerprint(mMockContext) != null);
+//        System.out.println(Nps.getDeviceFingerprint(mMockContext));
+//        assertTrue(Nps.getDeviceFingerprint(mMockContext) != null);
     }
 
     @Test
