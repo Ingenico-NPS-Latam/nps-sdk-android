@@ -35,8 +35,6 @@ public class Nps {
 	private String currency = "";
 	private String country = "";
 	private String environment = "";
-	private FraudForceManager x;
-	private FraudForceConfiguration ffConf;
 
 	public Nps(String environment, String clientSession, String merchantId) {
 		this.setEnvironment(environment);
@@ -48,18 +46,23 @@ public class Nps {
 			StrictMode.setThreadPolicy(policy);
 		}
 	}
-        
-        
 
 	static public String getDeviceFingerprint(Context context) {
-		FraudForceConfiguration configuration = new FraudForceConfiguration.Builder()
-//				.subscriberKey([YOUR-SUBSCRIBER-KEY-HERE])
-//    			.enableNetworkCalls(true) // Defaults to false if left out of configuration
-				.build();
+		FraudForceConfiguration configuration = new FraudForceConfiguration.Builder().build();
 		FraudForceManager fraudForceManager = FraudForceManager.getInstance();
 		fraudForceManager.initialize(configuration, context);
 		return FraudForceManager.getInstance().getBlackbox(context);
 	}
+
+//	static public String getDeviceFingerprint(Context context, String suscriberKey) {
+//		FraudForceConfiguration configuration = new FraudForceConfiguration.Builder()
+//				.subscriberKey(suscriberKey)
+//    			.enableNetworkCalls(true) // Defaults to false if left out of configuration
+//				.build();
+//		FraudForceManager fraudForceManager = FraudForceManager.getInstance();
+//		fraudForceManager.initialize(configuration, context);
+//		return FraudForceManager.getInstance().getBlackbox(context);
+//	}
 
 
     public String getNamespace() {
