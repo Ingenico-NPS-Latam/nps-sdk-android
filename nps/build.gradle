@@ -24,7 +24,7 @@ dependencies {
 //    compile fileTree(dir: 'libs', include: ['*.jar'])
 //    api fileTree(dir: 'libs', include: ['*.aar'])
 //    compile(name:'fraudforce-lib-4.1.1-release', ext:'aar')
-    compile files('libs/iovation.jar')
+    compile files('libs/fraudforce-lib-4.1.1-release.jar')
 
     compile 'com.google.code.ksoap2-android:ksoap2-android:3.6.2'
     compile 'junit:junit:4.12'
