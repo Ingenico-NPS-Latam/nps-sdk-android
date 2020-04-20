@@ -48,21 +48,14 @@ public class Nps {
 	}
 
 	static public String getDeviceFingerprint(Context context) {
-		FraudForceConfiguration configuration = new FraudForceConfiguration.Builder().build();
+		FraudForceConfiguration configuration = new FraudForceConfiguration.Builder()
+				.subscriberKey("y-UTylqo4z4HgBH3T3qCIJSeMOG81p82ZNMVPmYfTMo")
+    			//.enableNetworkCalls(true) // Defaults to false if left out of configuration
+				.build();
 		FraudForceManager fraudForceManager = FraudForceManager.getInstance();
 		fraudForceManager.initialize(configuration, context);
 		return FraudForceManager.getInstance().getBlackbox(context);
 	}
-
-//	static public String getDeviceFingerprint(Context context, String suscriberKey) {
-//		FraudForceConfiguration configuration = new FraudForceConfiguration.Builder()
-//				.subscriberKey(suscriberKey)
-//    			.enableNetworkCalls(true) // Defaults to false if left out of configuration
-//				.build();
-//		FraudForceManager fraudForceManager = FraudForceManager.getInstance();
-//		fraudForceManager.initialize(configuration, context);
-//		return FraudForceManager.getInstance().getBlackbox(context);
-//	}
 
 
     public String getNamespace() {
@@ -468,11 +461,7 @@ public class Nps {
         }
     }
 
-
-
-
 	static public class ResponseHandler {
-
 		public void onSuccess(PaymentMethodToken paymentMethodToken) {
 			// TODO Auto-generated method stub
 		}
@@ -480,11 +469,6 @@ public class Nps {
 		public void onError(Exception error) {
 			// TODO Auto-generated method stub
 		}
-		
 	}	
 
-
-
-
-	
 }
