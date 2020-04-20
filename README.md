@@ -322,3 +322,5 @@ This method allows you to get de Device Figerprint of the end-user's device.
 
 Nps.getDeviceFingerprint(getApplicationContext());
 ```
+
+Note: If your application uses NewRelic package, make sure it is updated to 5.24.2 or upper version.
